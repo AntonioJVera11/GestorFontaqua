@@ -1,18 +1,16 @@
 <?php
 
-    class Categorias Extends Controller {
+    class Trabajadores Extends Controller {
 
         function __construct() {
 
             parent ::__construct();
             
-            
         }
 
         function render() {
 
-            $this->view->render('categorias/index');
+            $this->view->render('trabajadores/index');
         }
     }
-
 ?>

@@ -25,7 +25,7 @@
 		<div class="card">
             
 			<div class="card-header">
-				MVC - Sección Artículos CREATE
+				Crear Artículo
 			</div>
 			<div class="card-body">
                 <?php require_once("template/articulos/form_nuevo_articulo.php")?>

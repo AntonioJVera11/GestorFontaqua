@@ -3,7 +3,9 @@
     require_once "models/articulosModel.php";
 	$nuevo = new articulosModel();
 	$articulos = $nuevo->get();
-	$cabecera = $nuevo->cabeceraTabla();
+    $cabecera = $nuevo->cabeceraTabla();
+    // var_dump($cabecera);
+    // exit(0);
 
 ?>
 <!doctype html>
@@ -24,7 +26,7 @@
 		<!-- Estilo card de bootstrap -->
 		<div class="card">
 			<div class="card-header">
-				MVC - Sección Artículos
+				Artículos registrados
 			</div>
 			<div class="card-body">
 			<section>
@@ -46,11 +48,9 @@
                                     <?php foreach ($articulos as $registro => $value):?>
                                         <tr>
                                             <td><?=$value->id?></td>
-                                            <td><?=$value->descripcion?></td>
-                                            <td><?=$value->precio_costo?></td>
-                                            <td><?=$value->precio_venta?></td>
-                                            <td><?=$value->categoria_id?></td>
-                                            <td><?=$value->stock?></td>
+                                            <td><?=$value->nombre?></td>
+                                            <td><?=$value->precio?></td>
+                                            <td><?=$value->modificado?></td>
                                             <td><img src="imagenes/<?=$value->imagen?>" width="40px" height="40px"></td>
                                             <td>
                                                 <a href="#" title="Visualizar"><i class="material-icons">visibility</i></a>

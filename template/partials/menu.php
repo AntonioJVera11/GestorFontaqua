@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="exCollapsingNavbar">
             <ul class="nav navbar-nav">
               <li class="nav-item active">
-                <a class="nav-link" href="<?= URL ?>index">Home
+                <a class="nav-link" href="<?= URL ?>index">Inicio
                   <span class="sr-only">(current)</span>
                 </a>
               </li>
@@ -19,7 +19,7 @@
                 </a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" href="<?= URL ?>categorias">Categorías
+                <a class="nav-link" href="<?= URL ?>trabajadores">Trabajadores
                   <span class="sr-only">(current)</span>
                 </a>
               </li>

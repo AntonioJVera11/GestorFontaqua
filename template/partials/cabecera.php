@@ -4,7 +4,8 @@
         <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h4 class="display-7">Fontaqua </h4>
-            <p class="lead">Tema 12 - DWES - Curso 19/20</p>
+            <p class="lead">Aplicación de Gestión de Artículos, Partes y Trabajadores</p>
+            <p class="lead">Creado por ©Antonio Juan Vera Muñoz</p>
         </div>
         </div>
     </hgroup>

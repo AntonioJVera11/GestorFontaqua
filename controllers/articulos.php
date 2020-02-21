@@ -20,7 +20,7 @@
 
         function create() {
 
-            $this->view->categorias =  $this->model->getCategorias();
+            // $this->view->categorias =  $this->model->getCategorias();
 
             if (!isset($this->view->articulo)) $this->view->articulo = null;
 
@@ -43,38 +43,35 @@
 
             $articulo = 
             [
-                'descripcion'     => filter_var($_POST['descripcion'], FILTER_SANITIZE_STRING),
-                'precio_costo'    => filter_var($_POST['precio_costo'], FILTER_SANITIZE_NUMBER_FLOAT),
-                'precio_venta'    => filter_var($_POST['precio_venta'], FILTER_SANITIZE_NUMBER_FLOAT),
-                'stock'           => filter_var($_POST['stock'], FILTER_SANITIZE_NUMBER_INT),
-                'categoria_id'    => filter_var($_POST['categoria_id'], FILTER_SANITIZE_NUMBER_INT),
+                'nombre'     => filter_var($_POST['nombre'], FILTER_SANITIZE_STRING),
+                'precio'    => filter_var($_POST['precio'], FILTER_SANITIZE_STRING),
+                'modificado'    => filter_var($_POST['modificado'], FILTER_SANITIZE_NUMBER_FLOAT),
                 'imagen'          => $_FILES['imagen']
                 
             ];
-
 
             # Validar datos del formulario
 
             $errores = array();
 
             # Valiar descripción
-            if (empty($articulo['descripcion'])) {
-                $errores['descripcion'] = "Campo obligatorio";
+            if (empty($articulo['nombre'])) {
+                $errores['nombre'] = "Campo obligatorio";
             }
 
-            # Validar precio_costo
-            if (empty($articulo['precio_costo'])) {
-                $errores['precio_costo'] = "Campo obligatorio";
-            } else if (!filter_var($articulo['precio_costo'], FILTER_VALIDATE_FLOAT)) {
-                $errores['precio_costo'] = "Valor no permitido";
+            # Validar precio
+            if (empty($articulo['precio'])) {
+                $errores['precio'] = "Campo obligatorio";
+            } else if (!filter_var($articulo['precio'], FILTER_VALIDATE_FLOAT)) {
+                $errores['precio'] = "Valor no permitido";
 
             }
 
-            # Validar precio_venta
-            if (empty($articulo['precio_venta'])) {
-                $errores['precio_venta'] = "Campo obligatorio";
-            } else if (!filter_var($articulo['precio_venta'], FILTER_VALIDATE_FLOAT)) {
-                $errores['precio_venta'] = "Valor no permitido";
+            # Validar modificado
+            if (empty($articulo['modificado'])) {
+                $errores['modificado'] = "Campo obligatorio";
+            } else if (!filter_var($articulo['modificado'], FILTER_SANITIZE_STRING)) {
+                $errores['modificado'] = "Valor no permitido";
 
             }
 
@@ -99,9 +96,9 @@
                 )
             );
             
-            if (!filter_var($articulo['categoria_id'], FILTER_VALIDATE_INT, $options)) {
-                $errores['categoria_id'] = "Valor fuera de rango";
-            }
+            // if (!filter_var($articulo['categoria_id'], FILTER_VALIDATE_INT, $options)) {
+            //     $errores['categoria_id'] = "Valor fuera de rango";
+            // }
 
             # Validar imagen jpg, gif, png
 

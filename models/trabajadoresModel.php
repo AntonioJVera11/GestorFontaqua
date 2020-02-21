@@ -1,6 +1,6 @@
 <?php 
 
-    class articulosModel extends Model {
+    class trabajadoresModel extends Model {
 
         public function __construct() {
 
@@ -10,7 +10,7 @@
 
         public function get() {
             try {
-                $consultaSQL = "SELECT * FROM articulos ORDER BY id";
+                $consultaSQL = "SELECT * FROM trabajadores ORDER BY id";
     
                 $pdo = $this->db->connect();
     
@@ -85,9 +85,12 @@
             $cabecera = [
                 "Id",
                 "Nombre",
-                "Precio",
-                "Última Modificación",
-                "Imagen"
+                "Apellidos",
+                "Email",
+                "Teléfono",
+                "Dirección",
+                "DNI",
+                "Fecha Nacimiento"
             ];
 
             return $cabecera;
