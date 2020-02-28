@@ -158,26 +158,41 @@
                 $mensaje=$this->model->insert($articulo);
                 
                 $this->view->mensaje = $mensaje;
-                $this->render();
+                $this->view->render('articulos/index');
                 
             } 
         }
 
         function edit($param = null) {
             $this->view->id = $param[0];
-            // var_dump($this->view->id);
+            $this->view->articulo = $this->model->getArticulo($param[0]);
+            $this->view->articulo["id"] = $param[0];
+            // var_dump($this->model->getArticulo($param[0]));
             // exit(0);
-            $this->view->articulo = $this->model->getArticulo($this->view->id);
+
             if (!isset($this->view->articulo)) $this->view->articulo = null;
             $this->view->render('articulos/edit/index');
+        }
+
+        function show($param = null) {
+            $this->view->id = $param[0];
+            $this->view->articulo = $this->model->getArticulo($param[0]);
+            $this->view->articulo["id"] = $param[0];
+            // var_dump($this->model->getArticulo($param[0]));
+            // exit(0);
+
+            if (!isset($this->view->articulo)) $this->view->articulo = null;
+            $this->view->render('articulos/show/index');
         }
 
         function updatearticulo() {
             # Sanear datos $_POST del formulario
             
+            // var_dump($this->view->articulo);
+            // exit(0);
             $articulo = 
             [
-                // 'id'     => $_POST['id'],
+                'id'     => $_POST['id'],
                 'nombre'     => filter_var($_POST['nombre'], FILTER_SANITIZE_STRING),
                 'precio'    => filter_var($_POST['precio'], FILTER_SANITIZE_STRING),
                 'modificado'    => filter_var($_POST['modificado'], FILTER_SANITIZE_SPECIAL_CHARS),
@@ -185,8 +200,6 @@
                 
             ];
             
-            // var_dump($param[0]);
-            // exit(0);
 
             # Validar datos del formulario
 
@@ -288,7 +301,7 @@
                 $this->view->errores = $errores;
                 $this->view->mensaje = "Errores en el formulario.";
                 $this->view->articulo = $articulo;
-                $this->edit($this->view->id);
+                $this->edit($param[0]);
 
                 
             } else {
@@ -303,7 +316,7 @@
                 $mensaje=$this->model->update($articulo);
                 
                 $this->view->mensaje = $mensaje;
-                $this->render();
+                $this->view->render('articulos/index');
                 
             } 
         }
