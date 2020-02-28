@@ -14,5 +14,28 @@
 
     <!-- Estilo Personalizado -->
     <link href="<?= URL ?>public/style.css" rel="stylesheet">
+    <style>
+    table tr:nth-child(even) {
+    background-color: #eee;
+    }
+
+    table tr:nth-child(odd) {
+    background-color: #fff;
+    }
+
+    table th {
+        background-color: #0057C7;
+        color: white;
+        text-transform: uppercase;
+    }
     
+    table tr:hover {
+        background-color: #B8D5FF;
+    }
+
+    .navbar {
+        background-color: #0057C7;
+        color: white;
+    }
+    </style>
 </head>

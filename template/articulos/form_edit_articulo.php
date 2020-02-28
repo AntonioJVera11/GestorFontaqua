@@ -1,7 +1,13 @@
-<form method="POST" action="<?= URL ?>articulos/registrar" enctype="multipart/form-data">
-
+<form method="POST" action="<?= URL ?>articulos/updatearticulo" enctype="multipart/form-data">
+<div class="form-group">
+        <label for="inputid">Id</label>
+        <input disabled type="number" value="<?= $this->articulo['id'] ?>" class="form-control" name="id" placeholder=""
+            require>
+        <small id="nameHelp"
+            class="form-text text-danger"><?= (isset($this->errores['id']))? $this->errores['id']:null?></small>
+    </div>
     <div class="form-group">
-        <label for="inputdescrip">Nombre</label>
+        <label for="inputnombre">Nombre</label>
         <input type="text" value="<?= $this->articulo['nombre'] ?>" class="form-control" name="nombre" placeholder=""
             require>
         <small id="nameHelp"
@@ -15,8 +21,8 @@
             class="form-text text-danger"><?= (isset($this->errores['precio']))? $this->errores['precio']:null?></small>
     </div>
     <div class="form-group">
-        <label for="inputprev">Fecha</label>
-        <input type="date" value="<?= $this->articulo['modificado'] ?>" min="0" step="0.01" class="form-control"
+        <label for="inputmod">Fecha</label>
+        <input type="date" value="<?= $this->articulo['modificado'] ?>"class="form-control"
             name="modificado" require>
         <small id="nameHelp"
             class="form-text text-danger"><?= (isset($this->errores['modificado']))? $this->errores['modificado']:null?></small>

@@ -49,13 +49,13 @@
                                         <tr>
                                             <td><?=$value->id?></td>
                                             <td><?=$value->nombre?></td>
-                                            <td><?=$value->precio?></td>
+                                            <td><?=$value->precio?> €</td>
                                             <td><?=$value->modificado?></td>
                                             <td><img src="imagenes/<?=$value->imagen?>" width="40px" height="40px"></td>
                                             <td>
-                                                <a href="#" title="Visualizar"><i class="material-icons">visibility</i></a>
-                                                <a href="#" title="Editar"><i class="material-icons">edit</i></a>
-                                                <a href="#" title="Eliminar"><i class="material-icons">clear</i></a>
+                                                <a href="<?= URL ?>articulos/show/<?=$value->id?>" title="Visualizar"><i class="material-icons">visibility</i></a>
+                                                <a href="<?= URL ?>articulos/edit/<?=$value->id?>" title="Editar"><i class="material-icons">edit</i></a>
+                                                <a href="<?= URL ?>articulos/delete/<?=$value->id?>"><i class="material-icons">clear</i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach;?>

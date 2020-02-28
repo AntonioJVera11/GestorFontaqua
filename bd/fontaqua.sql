@@ -9,12 +9,13 @@ CREATE TABLE IF NOT EXISTS articulos(
 	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(50) NOT NULL,
     precio FLOAT(10) NOT NULL,
-    modifcado TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    modificado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    imagen VARCHAR(50)
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8 COLLATE=UTF8_GENERAL_CI;
 
 INSERT INTO articulos VALUES
-	(NULL, "Tubo de PVC 2 metros", "35.9",  default),
-    (NULL, "Grifo cromado para cocina", "23.5",  default);
+	(NULL, "Tubo de PVC 2 metros", "35.9",  default, "tubopvc.png"),
+    (NULL, "Grifo cromado para cocina", "23.5",  default, "grifocromado.jpg");
 
 DROP TABLE IF EXISTS trabajadores;
 CREATE TABLE trabajadores (
