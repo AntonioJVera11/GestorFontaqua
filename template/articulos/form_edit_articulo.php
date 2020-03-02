@@ -1,9 +1,9 @@
-<form method="POST" action="<?= URL ?>articulos/updatearticulo" enctype="multipart/form-data">
-<div class="form-group">
-        <label for="inputid">Id</label>
-        <input disabled type="number" value="<?= $this->articulo['id'] ?>" class="form-control" name="id" placeholder=""
-            require>
-        <small id="nameHelp"
+<form method="POST" action="<?= URL ?>articulos/actualizar" enctype="multipart/form-data">
+    <div class="form-group">
+        <label hidden for="inputid">Id</label>
+        <input hidden type="number" value="<?= $this->articulo['id'] ?>" min="0" step="0.01" class="form-control"
+            name="id" require>
+        <small hidden id="nameHelp"
             class="form-text text-danger"><?= (isset($this->errores['id']))? $this->errores['id']:null?></small>
     </div>
     <div class="form-group">
@@ -22,8 +22,7 @@
     </div>
     <div class="form-group">
         <label for="inputmod">Fecha</label>
-        <input type="text" value="<?= $this->articulo['modificado'] ?>"class="form-control"
-            name="modificado" require>
+        <input type="text" value="<?= $this->articulo['modificado'] ?>" class="form-control" name="modificado" require>
         <small id="nameHelp"
             class="form-text text-danger"><?= (isset($this->errores['modificado']))? $this->errores['modificado']:null?></small>
     </div>

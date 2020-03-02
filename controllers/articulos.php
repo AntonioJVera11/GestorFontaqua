@@ -158,19 +158,20 @@
                 $mensaje=$this->model->insert($articulo);
                 
                 $this->view->mensaje = $mensaje;
+
                 $this->view->render('articulos/index');
                 
             } 
         }
 
-        function edit($param = null) {
+        function edit($param) {
             $this->view->id = $param[0];
-            $this->view->articulo = $this->model->getArticulo($param[0]);
+            $this->view->articulo = $this->model->getArticulo($this->view->id);
             $this->view->articulo["id"] = $param[0];
-            // var_dump($this->model->getArticulo($param[0]));
+            // var_dump($this->view->articulo);
             // exit(0);
 
-            if (!isset($this->view->articulo)) $this->view->articulo = null;
+            // if (!isset($this->view->articulo)) $this->view->articulo = null;
             $this->view->render('articulos/edit/index');
         }
 
@@ -182,14 +183,11 @@
             // exit(0);
 
             if (!isset($this->view->articulo)) $this->view->articulo = null;
-            $this->view->render('articulos/show/index');
+            $this->view->render();
         }
 
-        function updatearticulo() {
+        function actualizar() {
             # Sanear datos $_POST del formulario
-            
-            // var_dump($this->view->articulo);
-            // exit(0);
             $articulo = 
             [
                 'id'     => $_POST['id'],
@@ -200,10 +198,18 @@
                 
             ];
             
+            // var_dump($articulo);
+            // exit(0);
+            // var_dump($_REQUEST['id']);
+            // exit(0);
 
             # Validar datos del formulario
 
             $errores = array();
+
+            if (empty($articulo['id'])) {
+                $errores['id'] = "No recoge el ID";
+            }
 
             # Valiar descripción
             if (empty($articulo['nombre'])) {
@@ -301,7 +307,7 @@
                 $this->view->errores = $errores;
                 $this->view->mensaje = "Errores en el formulario.";
                 $this->view->articulo = $articulo;
-                $this->edit($param[0]);
+                $this->edit();
 
                 
             } else {
@@ -311,7 +317,9 @@
                 
                 # Actualizo el campo imagen con name
                 $articulo['imagen'] = $articulo['imagen']['name'];
-        
+                
+                // var_dump($articulo);
+                // exit(0);
                 # La función insert devuelve el mensaje resultante de añadir el registro
                 $mensaje=$this->model->update($articulo);
                 

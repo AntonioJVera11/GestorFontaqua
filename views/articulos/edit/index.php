@@ -4,7 +4,8 @@
 	$nuevo = new articulosModel();
 	$articulos = $nuevo->get();
 	$cabecera = $nuevo->cabeceraTabla();
-
+	// var_dump($this->articulo);
+	// exit(0);
 ?>
 <!doctype html>
 <html lang="es"> 

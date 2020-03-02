@@ -41,8 +41,9 @@
                 $stmt->execute();
                 
                 $articulos = $stmt->fetch();
+                // $articulos["id"] = $id;
                 
-                // var_dump($articulos);
+                // var_dump($articulos['nombre']);
                 // exit(0);
 
             return $articulos;
@@ -121,12 +122,12 @@
         }
 
         public function update($articulo) {
-            $id = $articulo["id"];
-            // var_dump($articulo["id"]);
+            // $id = $articulo["id"];
+            // var_dump($articulo);
             // exit(0);
             try {
                 $updateSQL ="UPDATE articulos SET
-                nombre =:nombre,
+                nombre = :nombre,
                 precio = :precio,
                 modificado = :modificado,
                 imagen = :imagen
@@ -135,7 +136,7 @@
                 $pdo = $this->db->connect();
                 $stmt = $pdo->prepare($updateSQL);
                 
-                $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+                $stmt->bindParam(':id', $articulo['id'], PDO::PARAM_INT);
                 $stmt->bindParam(':nombre', $articulo['nombre'], PDO::PARAM_STR, 50);
                 $stmt->bindParam(':precio', $articulo['precio']);
                 $stmt->bindParam(':modificado', $articulo['modificado'], PDO::PARAM_STR);
