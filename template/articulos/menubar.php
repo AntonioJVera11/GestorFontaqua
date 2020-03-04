@@ -24,13 +24,9 @@
           Ordenar
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="ordenar.php?criterio=nombre">Nombre</a>
-          <a class="dropdown-item" href="ordenar.php?criterio=apellidos">Apellidos</a>
-          <a class="dropdown-item" href="ordenar.php?criterio=ciudad">Ciudad</a>
-          <a class="dropdown-item" href="ordenar.php?criterio=email">Email</a>
-          <a class="dropdown-item" href="ordenar.php?criterio=edad">Edad</a>
-          <a class="dropdown-item" href="ordenar.php?criterio=categoria">Categoria</a>
-          <a class="dropdown-item" href="ordenar.php?criterio=club">Club</a>
+        <a class="dropdown-item" href="#">Nombre</a>
+          <a class="dropdown-item" href="#">Precio</a>
+          <a class="dropdown-item" href="#">Fecha de Modificación</a>
         </div>
       </li>
     </ul>

@@ -50,7 +50,7 @@
                                             <td><?=$value->id?></td>
                                             <td><?=$value->nombre?></td>
                                             <td><?=$value->precio?> €</td>
-                                            <td><?=$value->modificado?></td>
+                                            <td style="display: block; white-space: nowrap; width: 32%; overflow: hidden"><?=$value->modificado?></td>
                                             <td><img src="imagenes/<?=$value->imagen?>" width="40px" height="40px"></td>
                                             <td>
                                                 <a href="<?= URL ?>articulos/show/<?=$value->id?>" title="Visualizar"><i class="material-icons">visibility</i></a>

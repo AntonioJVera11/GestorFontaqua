@@ -38,6 +38,6 @@
     <hr>
     <a href="<?= URL ?>articulos" class="btn btn-secondary" role="button" aria-pressed="true">Cancelar</a>
     <button type="reset" class="btn btn-secondary">Reset</button>
-    <button type="submit" class="btn btn-primary">Añadir</button>
+    <button type="submit" class="btn btn-primary">Actualizar</button>
 
 </form>

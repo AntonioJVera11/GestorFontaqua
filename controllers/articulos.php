@@ -11,6 +11,8 @@
 
         function render() {
 
+            session_start();
+
             $articulos = $this->model->get();
             $this->view->datos = $articulos;
             
@@ -166,24 +168,21 @@
 
         function edit($param) {
             $this->view->id = $param[0];
+
             $this->view->articulo = $this->model->getArticulo($this->view->id);
             $this->view->articulo["id"] = $param[0];
-            // var_dump($this->view->articulo);
-            // exit(0);
 
-            // if (!isset($this->view->articulo)) $this->view->articulo = null;
             $this->view->render('articulos/edit/index');
         }
 
         function show($param = null) {
             $this->view->id = $param[0];
+
             $this->view->articulo = $this->model->getArticulo($param[0]);
             $this->view->articulo["id"] = $param[0];
-            // var_dump($this->model->getArticulo($param[0]));
-            // exit(0);
 
             if (!isset($this->view->articulo)) $this->view->articulo = null;
-            $this->view->render();
+            $this->view->render('articulos/show/index');
         }
 
         function actualizar() {
@@ -337,7 +336,6 @@
             
             $this->view->render('articulos/index');
         }
-
     }
 
 ?>

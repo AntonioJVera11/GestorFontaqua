@@ -10,7 +10,7 @@
         }
 
         function render() {
-
+            session_start();
             $this->view->render('main/index');
         }
     }

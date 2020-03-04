@@ -37,8 +37,6 @@
 
     <!-- botones acción -->
     <hr>
-    <a href="<?= URL ?>articulos" class="btn btn-secondary" role="button" aria-pressed="true">Cancelar</a>
-    <button type="reset" class="btn btn-secondary">Reset</button>
-    <button type="submit" class="btn btn-primary">Añadir</button>
+    <a href="<?= URL ?>articulos" class="btn btn-secondary" role="button" aria-pressed="true">Volver</a>
 
 </form>
