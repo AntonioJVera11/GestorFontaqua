@@ -31,7 +31,6 @@
             <div class="card-body">
                 <section>
                     <article>
-                        <?php require_once("template/articulos/menubar.php")?>
                         <br>
                         <table class="table">
                             <thead>

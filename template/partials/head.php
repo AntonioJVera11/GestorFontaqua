@@ -14,6 +14,7 @@
 
     <!-- Estilo Personalizado -->
     <link href="<?= URL ?>public/style.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/proxy/yq91URdh68vgw1rktRTEHM5c306NZ8xTy_d6aEqkoft4Dims7XOhrX-KERPzD44z3q1LWPLnSCKkRjFPdSUPM1R_90wAFQ6jvHan-2H0P7_X5q73EXIpXEDXwd5xg0Qa_Mh8" sizes="196x196" />
     <style>
     table tr:nth-child(even) {
     background-color: #eee;

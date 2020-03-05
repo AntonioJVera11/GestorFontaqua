@@ -46,9 +46,13 @@
                 $this->render();
             } else {
                 session_start();
-
                 $_SESSION["id"] = $user['id'];
+                $rol = $this->model->getRol($user['id']);
 
+                $_SESSION['rol_id'] = $rol['role_id'];
+
+                $_SESSION['rol_name']= $rol['name'];
+                $_SESSION["email"] = $email;
                 $_SESSION["name"] = $user['name'];
 
                 header('Location: ../articulos');
@@ -100,10 +104,9 @@
     
             } else {
 
-                # La función insert devuelve el mensaje resultante de añadir el registro
                 $mensaje=$this->model->insert($user);
                 $user = $this->model->getUsuarioEmail($email);
-                $this->model->insertRol($user['id'], 3);
+                $this->model->insertRol($user['id'], 1);
 
                 $email = new registro_email($_POST['nombre'], $_POST['email'], $_POST['password']);
 		        $email->enviar_email();
@@ -171,12 +174,10 @@
 
                     $this->view->render('user/changepass/index');
     
-                    
                 } else {
     
-                    # La función insert devuelve el mensaje resultante de añadir el registro
                     $mensaje = $this->model->updatePass($_SESSION['id'], $pass1);
-                    $this->view->mensaje = $mensaje;
+                    $this->view->mensaje = "Se ha cambiado la contraseña con éxito";
     
                     $this->view->render('user/changepass/index');
                     
@@ -225,7 +226,7 @@
                     
                 } else {
                     $mensaje = $this->model->updateUser($_SESSION['id'], $name, $email);
-                    $this->view->mensaje = $mensaje;
+                    $this->view->mensaje = "El usuario ha sido actualizado con éxito";
                     $_SESSION['name'] = $name;
                     $_SESSION['email'] = $email;
                     $this->view->name = $name;
