@@ -11,10 +11,11 @@
       </li>
       
       <!-- Capa Gestión perfiles -->
-     
+      <?php if (!empty($_SESSION['id'])): ?>
         <li class="nav-item">
           <a class="nav-link" href="<?= URL ?>articulos/create">Crear</a>
         </li>
+      <?php endif ?>
       
      
       <!-- Fin capa gestión de perfiles -->
@@ -30,6 +31,9 @@
         </div>
       </li>
     </ul>
+    <a href="<?= URL ?>articulos/imprimir_pdf"><i class="material-icons">picture_as_pdf</i></a>
+    &nbsp;
+    &nbsp;
     <form class="form-inline my-2 my-lg-0">
       <input name="expresion" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
       <button class="btn btn-light my-2 my-sm-0" formaction="buscar.php" type="submit">Buscar</button>

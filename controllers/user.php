@@ -33,12 +33,9 @@
                 if(!$coincide){
                     $errores['password'] = "La contraseña está incorrecta.";
                 }
-                
-
             } else{
                 $errores['email'] =  "El email no está registrado.";
             }
-
 
             if (!empty($errores)) {
                 # Datos no validados
@@ -56,8 +53,6 @@
 
                 header('Location: ../articulos');
             }
-
-
         }
 
         function validar_registro(){
@@ -102,12 +97,13 @@
                 $this->view->user = $user;
 
                 $this->register();
-
-                
+    
             } else {
 
                 # La función insert devuelve el mensaje resultante de añadir el registro
                 $mensaje=$this->model->insert($user);
+                $user = $this->model->getUsuarioEmail($email);
+                $this->model->insertRol($user['id'], 3);
 
                 $email = new registro_email($_POST['nombre'], $_POST['email'], $_POST['password']);
 		        $email->enviar_email();
@@ -115,10 +111,7 @@
                 $this->view->mensaje = $mensaje;
 
                 $this->render();
-                
             } 
-
-
         }
 
         function logout(){
@@ -131,5 +124,114 @@
 
         }
 
+        function changepass($param = null){
+            session_start();
+            if (isset($_SESSION['id'])){
+                $this->view->render('user/changepass/index');
+            } else {
+                
+            }
+        }
 
+        function validate_changepass($param = null){
+            session_start();
+            if (isset($_SESSION['id'])){
+                $pass_antigua = filter_var($_POST['password_antigua'], FILTER_SANITIZE_STRING);
+                $pass1 = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+                $pass2 = filter_var($_POST['password2'], FILTER_SANITIZE_STRING);
+                
+
+
+                $user = $this->model->getUsuario($_SESSION['id']);
+
+                if (empty($pass_antigua)) {
+                    $errores['password_antigua'] = "Campo obligatorio";
+                }
+                if (empty($pass1)) {
+                    $errores['password'] = "Campo obligatorio";
+                }
+                if (empty($pass2)) {
+                    $errores['password2'] = "Campo obligatorio";
+                }
+                if ($pass1 != $pass2){
+                    $errores['password'] = "Las contraseñas no son iguales.";
+                }
+    
+
+                $coincide = password_verify($pass_antigua, $user['password']);
+                if(!$coincide){
+                    $errores['password_antigua'] = "La contraseña está incorrecta.";
+                }
+
+                if (!empty($errores)) {
+                
+                    # Datos no validados
+                    $this->view->errores = $errores;
+                    $this->view->mensaje = ["Errores en el formulario.", 'danger'];
+
+                    $this->view->render('user/changepass/index');
+    
+                    
+                } else {
+    
+                    # La función insert devuelve el mensaje resultante de añadir el registro
+                    $mensaje = $this->model->updatePass($_SESSION['id'], $pass1);
+                    $this->view->mensaje = $mensaje;
+    
+                    $this->view->render('user/changepass/index');
+                    
+                } 
+            }
+            
+        }
+
+        function editaruser($param=null){
+            session_start();
+            if (isset($_SESSION['id'])){
+                $this->view->name = $_SESSION['name'];
+                $this->view->email = $_SESSION['email'];
+
+                $this->view->render('user/editaruser/index');
+            }
+        }
+
+        function validate_editaruser(){
+            session_start();
+            if (isset($_SESSION['id'])){
+                $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+                $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+                $email = filter_var($email, FILTER_VALIDATE_EMAIL);
+
+                if (empty($name)) {
+                    $errores['nombre'] = "Campo obligatorio";
+                }
+                if (empty($email)) {
+                    $errores['email'] = "Campo obligatorio";
+                }
+                $usuario = $this->model->getUsuarioEmail($email);
+                if ($usuario != false && $usuario['id'] != $_SESSION['id']){
+                    $errores['email'] = "Este Email ya está registrado.";
+                }
+                if (!empty($errores)) {
+                
+                    # Datos no validados
+                    $this->view->errores = $errores;
+                    $this->view->mensaje = ["Errores en el formulario.", 'danger'];
+                    $this->view->name = $name;
+                    $this->view->email = $email;
+
+                    $this->view->render('user/editaruser/index');
+    
+                    
+                } else {
+                    $mensaje = $this->model->updateUser($_SESSION['id'], $name, $email);
+                    $this->view->mensaje = $mensaje;
+                    $_SESSION['name'] = $name;
+                    $_SESSION['email'] = $email;
+                    $this->view->name = $name;
+                    $this->view->email = $email;
+                    $this->view->render('user/editaruser/index');
+                }
+            }
+        }
     }

@@ -29,9 +29,11 @@
                                     <?php foreach ($this->cabecera as $key => $valor): ?>
                                     <th><?=$valor?></th>
                                     <?php endforeach;?>
+                                    <?php if (!empty($_SESSION['id'])): ?>
                                     <th>
                                         Acciones
                                     </th>
+                                    <?php endif ?>
                                 </tr>
                             </thead>	
                             <tbody>
@@ -40,13 +42,20 @@
                                             <td><?=$value->id?></td>
                                             <td><?=$value->nombre?></td>
                                             <td><?=$value->precio?> €</td>
+                                            <?php if (!empty($_SESSION['id'])): ?>
                                             <td style="display: block; white-space: nowrap; width: 31%; overflow: hidden"><?=$value->modificado?></td>
+                                            <?php endif ?>
+                                            <?php if (empty($_SESSION['id'])): ?>
+                                            <td style="display: block; white-space: nowrap; width: 28%; overflow: hidden"><?=$value->modificado?></td>
+                                            <?php endif ?>
                                             <td><img src="imagenes/<?=$value->imagen?>" width="40px" height="40px"></td>
+                                            <?php if (!empty($_SESSION['id'])): ?>
                                             <td>
                                                 <a href="<?= URL ?>articulos/show/<?=$value->id?>" title="Visualizar"><i class="material-icons">visibility</i></a>
                                                 <a href="<?= URL ?>articulos/edit/<?=$value->id?>" title="Editar"><i class="material-icons">edit</i></a>
                                                 <a href="<?= URL ?>articulos/delete/<?=$value->id?>"><i class="material-icons">clear</i></a>
                                             </td>
+                                            <?php endif ?>
                                         </tr>
                                     <?php endforeach;?>
                             </tbody>			

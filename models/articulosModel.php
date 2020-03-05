@@ -20,7 +20,9 @@
                 $stmt->execute();
     
                 $articulos = $stmt->fetchAll();
-    
+                
+                // var_dump($articulos);
+                // exit(0);
                 return $articulos;
                 
             } catch(PDOException $e) {

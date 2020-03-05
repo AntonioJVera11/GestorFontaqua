@@ -1,5 +1,6 @@
 <?php
-
+    require_once('fpdf/fpdf.php');
+    require_once('class/mi_pdf.php');
     class Articulos Extends Controller {
 
         function __construct() {
@@ -332,6 +333,40 @@
                 $this->view->render('articulos/index');
                 
             } 
+        }
+
+        public function imprimir_pdf(){
+            $pdf = new mi_pdf();
+            $pdf->Addpage();
+            $pdf->SetFont('Helvetica', '', 10);
+    
+            $pdf-> Cabecera_archivos();
+    
+            $archivos = $this->model->get();
+            $total_capacidad = 0;
+            $altura = 20;
+    
+            foreach($archivos as $i => $archivo){
+                $altura = $altura + 8.5;
+                $pdf->Cell(10,8,utf8_decode($archivo->id),0,0);
+    
+                $pdf->Cell(60,8,utf8_decode($archivo->nombre),0,0);
+    
+                $pdf->Cell(20,8,utf8_decode($archivo->precio.' eur'),0,0);
+
+                $pdf->Cell(50,8,utf8_decode($archivo->modificado),0,0);
+
+                $pdf->Cell(50,8,$pdf->Image('imagenes/'.$archivo->imagen, 155, $altura, 4, 0),0,1);
+
+                // $pdf->Image('imagenes/'.$archivo->imagen, 10, 10, 10, 0, 'png');
+
+            }
+    
+            $pdf->Cell(45,10,utf8_decode('Número de artículos: '), 'T', 0);
+            $pdf->Cell(45,10,utf8_decode($i+1), 'T', 0);
+            $pdf->Cell(90,8,utf8_decode(''), 'T', 1, 'R');
+    
+            $pdf->Output('I', 'articulos.pdf');
         }
     }
     
