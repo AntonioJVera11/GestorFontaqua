@@ -14,15 +14,19 @@
             session_start();
 
             $articulos = $this->model->get();
-            $this->view->datos = $articulos;
+            $this->view->articulos = $articulos;
+            $this->view->cabecera = $this->model->cabeceraTabla();
             
 
             $this->view->render('articulos/index');
         }
 
         function create() {
+            session_start();
 
-            // $this->view->categorias =  $this->model->getCategorias();
+            $articulos = $this->model->get();
+            $this->view->articulos = $articulos;
+            $this->view->cabecera = $this->model->cabeceraTabla();
 
             if (!isset($this->view->articulo)) $this->view->articulo = null;
 
@@ -30,9 +34,50 @@
 
         }
         
+        function edit($param) {
+            session_start();
+
+            $this->view->id = $param[0];
+            
+            $this->view->articulo = $this->model->getArticulo($this->view->id);
+            $this->view->articulo["id"] = $param[0];
+            
+            // var_dump($this->view->articulo);
+            // exit(0);
+            
+            $articulos = $this->model->get();
+            $this->view->articulos = $articulos;
+            $this->view->cabecera = $this->model->cabeceraTabla();
+            
+            $this->view->render('articulos/edit/index');
+        }
+        
+        function show($param = null) {
+            session_start();
+            
+            $this->view->id = $param[0];
+
+            $this->view->articulo = $this->model->getArticulo($param[0]);
+            $this->view->articulo["id"] = $param[0];
+
+            if (!isset($this->view->articulo)) $this->view->articulo = null;
+            $this->view->render('articulos/show/index');
+        }
+
+        function delete($param) {
+            session_start();
+            
+            $this->model->delete($param[0]);
+            
+            $articulos = $this->model->get();
+            $this->view->datos = $articulos;
+            
+            $this->view->render('articulos/index');
+        }
+
         function registrar() {
             # Sanear datos $_POST del formulario
-
+    
             $articulo = 
             [
                 'nombre'     => filter_var($_POST['nombre'], FILTER_SANITIZE_STRING),
@@ -41,35 +86,35 @@
                 'imagen'          => $_FILES['imagen']
                 
             ];
-
+    
             // var_dump($articulo);
             // exit(0);
-
+    
             # Validar datos del formulario
-
+    
             $errores = array();
-
+    
             # Valiar descripción
             if (empty($articulo['nombre'])) {
                 $errores['nombre'] = "Campo obligatorio";
             }
-
+    
             # Validar precio
             if (empty($articulo['precio'])) {
                 $errores['precio'] = "Campo obligatorio";
             } else if (!filter_var($articulo['precio'], FILTER_VALIDATE_FLOAT)) {
                 $errores['precio'] = "Valor no permitido";
-
+    
             }
-
+    
             # Validar modificado
             if (empty($articulo['modificado'])) {
                 $errores['modificado'] = "Campo obligatorio";
             } else if (!filter_var($articulo['modificado'], FILTER_SANITIZE_STRING)) {
                 $errores['modificado'] = "Valor no permitido";
-
+    
             }
-
+    
             # Validar stock con rango
             $options = array(
                 'options' => array(
@@ -79,9 +124,9 @@
             );
            
             
-
-
-
+    
+    
+    
             # Validar categoria_id con rango
             $options = array(
                 'options' => array(
@@ -93,12 +138,12 @@
             // if (!filter_var($articulo['categoria_id'], FILTER_VALIDATE_INT, $options)) {
             //     $errores['categoria_id'] = "Valor fuera de rango";
             // }
-
+    
             # Validar imagen jpg, gif, png
-
-
+    
+    
             # Comprobamos antes si ha ocurrido algún error en la subida de archivo
-
+    
             $FileUploadErrors = array(
                 0 => 'No hay error, fichero subido con éxito.',
                 1 => 'El fichero subido excede la directiva upload_max_filesize de php.ini.',
@@ -117,7 +162,7 @@
             }  else 
             
             if (is_uploaded_file($articulo['imagen']['tmp_name'])) {
-
+    
                 $info = new SplFileInfo($articulo['imagen']['tmp_name']);
                 
                 # Validamos tamaño máximo 2MB personalizado
@@ -127,7 +172,7 @@
                 if ($info->getSize() > $max_tamano ) {
                     $errores['imagen'] = "Tamaño de archivo no permitido. Máximo 2MB";
                 }
-
+    
                 # Validamos el tipo
                 $info = new SplFileInfo($articulo['imagen']['name']);
                 $tipos_permitidos =['jpeg', 'JPEG','jpg', 'JPG', 'gif', 'GIF',  'png', 'PNG'];
@@ -137,7 +182,7 @@
                 }
                 
             }
-
+    
             if (!empty($errores)) {
                 // var_dump($errores);
                 // exit(0);
@@ -146,10 +191,10 @@
                 $this->view->mensaje = "Errores en el formulario.";
                 $this->view->articulo = $articulo;
                 $this->create();
-
+    
                 
             } else {
-   
+    
                 # Datos validados: insertamos registros y movemos imagen 
                 move_uploaded_file($articulo['imagen']['tmp_name'],"imagenes/".$articulo['imagen']['name']);
                 
@@ -160,31 +205,16 @@
                 $mensaje=$this->model->insert($articulo);
                 
                 $this->view->mensaje = $mensaje;
-
+    
+                $articulos = $this->model->get();
+                $this->view->articulos = $articulos;
+                $this->view->cabecera = $this->model->cabeceraTabla();
+    
                 $this->view->render('articulos/index');
                 
             } 
         }
-
-        function edit($param) {
-            $this->view->id = $param[0];
-
-            $this->view->articulo = $this->model->getArticulo($this->view->id);
-            $this->view->articulo["id"] = $param[0];
-
-            $this->view->render('articulos/edit/index');
-        }
-
-        function show($param = null) {
-            $this->view->id = $param[0];
-
-            $this->view->articulo = $this->model->getArticulo($param[0]);
-            $this->view->articulo["id"] = $param[0];
-
-            if (!isset($this->view->articulo)) $this->view->articulo = null;
-            $this->view->render('articulos/show/index');
-        }
-
+        
         function actualizar() {
             # Sanear datos $_POST del formulario
             $articulo = 
@@ -197,69 +227,42 @@
                 
             ];
             
-            // var_dump($articulo);
+            // var_dump($articulo['imagen']);
             // exit(0);
             // var_dump($_REQUEST['id']);
             // exit(0);
-
+    
             # Validar datos del formulario
-
+    
             $errores = array();
-
+    
             if (empty($articulo['id'])) {
                 $errores['id'] = "No recoge el ID";
             }
-
+    
             # Valiar descripción
             if (empty($articulo['nombre'])) {
                 $errores['nombre'] = "Campo obligatorio";
             }
-
+    
             # Validar precio
             if (empty($articulo['precio'])) {
                 $errores['precio'] = "Campo obligatorio";
             } else if (!filter_var($articulo['precio'], FILTER_VALIDATE_FLOAT)) {
                 $errores['precio'] = "Valor no permitido";
-
+    
             }
-
+    
             # Validar modificado
             if (empty($articulo['modificado'])) {
                 $errores['modificado'] = "Campo obligatorio";
             } else if (!filter_var($articulo['modificado'], FILTER_SANITIZE_STRING)) {
                 $errores['modificado'] = "Valor no permitido";
-
+    
             }
-
-            # Validar stock con rango
-            $options = array(
-                'options' => array(
-                    'min_range' => 0,
-                    'max_range' => 1000,
-                )
-            );
-           
-            
-
-
-
-            # Validar categoria_id con rango
-            $options = array(
-                'options' => array(
-                    'min_range' => 1,
-                    'max_range' => 10,
-                )
-            );
-            
-            // if (!filter_var($articulo['categoria_id'], FILTER_VALIDATE_INT, $options)) {
-            //     $errores['categoria_id'] = "Valor fuera de rango";
-            // }
-
-            # Validar imagen jpg, gif, png
-
-
+    
             # Comprobamos antes si ha ocurrido algún error en la subida de archivo
-
+    
             $FileUploadErrors = array(
                 0 => 'No hay error, fichero subido con éxito.',
                 1 => 'El fichero subido excede la directiva upload_max_filesize de php.ini.',
@@ -278,7 +281,7 @@
             }  else 
             
             if (is_uploaded_file($articulo['imagen']['tmp_name'])) {
-
+    
                 $info = new SplFileInfo($articulo['imagen']['tmp_name']);
                 
                 # Validamos tamaño máximo 2MB personalizado
@@ -288,7 +291,7 @@
                 if ($info->getSize() > $max_tamano ) {
                     $errores['imagen'] = "Tamaño de archivo no permitido. Máximo 2MB";
                 }
-
+    
                 # Validamos el tipo
                 $info = new SplFileInfo($articulo['imagen']['name']);
                 $tipos_permitidos =['jpeg', 'JPEG','jpg', 'JPG', 'gif', 'GIF',  'png', 'PNG'];
@@ -298,7 +301,7 @@
                 }
                 
             }
-
+    
             if (!empty($errores)) {
                 // var_dump($errores);
                 // exit(0);
@@ -307,35 +310,29 @@
                 $this->view->mensaje = "Errores en el formulario.";
                 $this->view->articulo = $articulo;
                 $this->edit();
-
+    
                 
             } else {
-   
+    
                 # Datos validados: insertamos registros y movemos imagen 
                 move_uploaded_file($articulo['imagen']['tmp_name'],"imagenes/".$articulo['imagen']['name']);
                 
                 # Actualizo el campo imagen con name
                 $articulo['imagen'] = $articulo['imagen']['name'];
                 
-                // var_dump($articulo);
-                // exit(0);
                 # La función insert devuelve el mensaje resultante de añadir el registro
                 $mensaje=$this->model->update($articulo);
+    
+                $articulos = $this->model->get();
+                $this->view->articulos = $articulos;
+    
+                $this->view->cabecera = $this->model->cabeceraTabla();
                 
                 $this->view->mensaje = $mensaje;
                 $this->view->render('articulos/index');
                 
             } 
         }
-
-        function delete($param) {
-            $this->model->delete($param[0]);
-            
-            $articulos = $this->model->get();
-            $this->view->datos = $articulos;
-            
-            $this->view->render('articulos/index');
-        }
     }
-
+    
 ?>

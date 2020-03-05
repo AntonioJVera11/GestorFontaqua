@@ -30,7 +30,8 @@
     <input disabled type="hidden" name="MAX_FILE_SIZE" value="2097152" />
     <div class="form-group">
         <label for="inputFile">Imagen</label>
-        <input disabled type="file" class="form-control-file" name="imagen">
+        <!-- <input type="file" class="form-control-file" name="imagen"> -->
+        <img src="<?= URL ?>imagenes/<?= $this->articulo['imagen'] ?>" alt="" >
     </div>
     <small id="nameHelp"
         class="form-text text-danger"><?= (isset($this->errores['imagen']))? $this->errores['imagen']:null?></small>

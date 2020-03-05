@@ -25,7 +25,7 @@
 		<div class="card">
             
 			<div class="card-header">
-				Editar Artículo
+				Mostrar Artículo
 			</div>
 			<div class="card-body">
                 <?php require_once("template/articulos/form_show_articulo.php")?>

@@ -1,11 +1,3 @@
-<?php
-
-    require_once "models/articulosModel.php";
-	$nuevo = new articulosModel();
-	$articulos = $nuevo->get();
-	$cabecera = $nuevo->cabeceraTabla();
-
-?>
 <!doctype html>
 <html lang="es"> 
 

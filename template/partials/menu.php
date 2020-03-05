@@ -2,6 +2,9 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" role="navigation">
   <div class="container">
+    <i class="material-icons">
+      build
+    </i>
     <a class="navbar-brand" href="<?= URL ?>index">Fontaqua</a>
     <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
       &#9776;

@@ -1,13 +1,3 @@
-<?php
-
-    require_once "models/articulosModel.php";
-	$nuevo = new articulosModel();
-	$articulos = $nuevo->get();
-    $cabecera = $nuevo->cabeceraTabla();
-    // var_dump($cabecera);
-    // exit(0);
-
-?>
 <!doctype html>
 <html lang="es"> 
 
@@ -36,7 +26,7 @@
                         <table class ="table">
                             <thead>
                                 <tr>
-                                    <?php foreach ($cabecera as $key => $valor): ?>
+                                    <?php foreach ($this->cabecera as $key => $valor): ?>
                                     <th><?=$valor?></th>
                                     <?php endforeach;?>
                                     <th>
@@ -45,12 +35,12 @@
                                 </tr>
                             </thead>	
                             <tbody>
-                                    <?php foreach ($articulos as $registro => $value):?>
+                                    <?php foreach ($this->articulos as $registro => $value):?>
                                         <tr>
                                             <td><?=$value->id?></td>
                                             <td><?=$value->nombre?></td>
                                             <td><?=$value->precio?> €</td>
-                                            <td style="display: block; white-space: nowrap; width: 32%; overflow: hidden"><?=$value->modificado?></td>
+                                            <td style="display: block; white-space: nowrap; width: 31%; overflow: hidden"><?=$value->modificado?></td>
                                             <td><img src="imagenes/<?=$value->imagen?>" width="40px" height="40px"></td>
                                             <td>
                                                 <a href="<?= URL ?>articulos/show/<?=$value->id?>" title="Visualizar"><i class="material-icons">visibility</i></a>
@@ -61,7 +51,7 @@
                                     <?php endforeach;?>
                             </tbody>			
                         </table>
-                        <h5>El número de artículos es: <?= count($articulos);?></h4>
+                        <h6>El número de artículos es: <?= count($this->articulos);?></h6>
                     </article>
                 </section>
 

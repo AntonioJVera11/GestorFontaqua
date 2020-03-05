@@ -24,7 +24,7 @@
     }
 
     table th {
-        background-color: #0057C7;
+        background-color: #436b99;
         color: white;
         text-transform: uppercase;
     }

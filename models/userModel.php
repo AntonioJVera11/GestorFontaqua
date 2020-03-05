@@ -21,7 +21,7 @@ class UserModel extends Model{
 
             $pdoStmt->execute();
 
-			return 'Registro Añadido Con Éxito';
+			return 'Usuario registrado con éxito. Has recibido un e-mail de confirmación.';
         } catch (PDOException $e) {
             $error = 'Error al añadir registro: ' . $e->getMessage() . " en la línea: " . $e->getLine();
 			return $error;
