@@ -106,7 +106,7 @@
 
                 $mensaje=$this->model->insert($user);
                 $user = $this->model->getUsuarioEmail($email);
-                $this->model->insertRol($user['id'], 1);
+                $this->model->insertRol($user['id'], 3);
 
                 $email = new registro_email($_POST['nombre'], $_POST['email'], $_POST['password']);
 		        $email->enviar_email();

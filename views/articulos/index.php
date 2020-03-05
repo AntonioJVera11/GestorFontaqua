@@ -49,12 +49,25 @@
                                             <td style="display: block; white-space: nowrap; width: 28%; overflow: hidden"><?=$value->modificado?></td>
                                             <?php endif ?>
                                             <td><img src="imagenes/<?=$value->imagen?>" width="40px" height="40px"></td>
-                                            <?php if (!empty($_SESSION['id'])): ?>
-                                            <td>
-                                                <a href="<?= URL ?>articulos/show/<?=$value->id?>" title="Visualizar"><i class="material-icons">visibility</i></a>
-                                                <a href="<?= URL ?>articulos/edit/<?=$value->id?>" title="Editar"><i class="material-icons">edit</i></a>
-                                                <a href="<?= URL ?>articulos/delete/<?=$value->id?>"><i class="material-icons">clear</i></a>
-                                            </td>
+                                            <?php if (isset($_SESSION['id'])): ?>
+                                                <?php if ($_SESSION['rol_name'] == "Administrador"): ?>
+                                                <td>
+                                                    <a href="<?= URL ?>articulos/show/<?=$value->id?>" title="Visualizar"><i class="material-icons">visibility</i></a>
+                                                    <a href="<?= URL ?>articulos/edit/<?=$value->id?>" title="Editar"><i class="material-icons">edit</i></a>
+                                                    <a href="<?= URL ?>articulos/delete/<?=$value->id?>"><i class="material-icons">clear</i></a>
+                                                </td>
+                                                <?php endif ?>
+                                                <?php if ($_SESSION['rol_name'] == "Editor"): ?>
+                                                <td>
+                                                    <a href="<?= URL ?>articulos/show/<?=$value->id?>" title="Visualizar"><i class="material-icons">visibility</i></a>
+                                                    <a href="<?= URL ?>articulos/edit/<?=$value->id?>" title="Editar"><i class="material-icons">edit</i></a>
+                                                </td>
+                                                <?php endif ?>
+                                                <?php if ($_SESSION['rol_name'] == "Registrado"): ?>
+                                                <td>
+                                                    <a href="<?= URL ?>articulos/show/<?=$value->id?>" title="Visualizar"><i class="material-icons">visibility</i></a>
+                                                </td>
+                                                <?php endif ?>
                                             <?php endif ?>
                                         </tr>
                                     <?php endforeach;?>

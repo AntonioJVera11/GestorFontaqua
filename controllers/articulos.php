@@ -335,6 +335,33 @@
             } 
         }
 
+        public function ordenar($param = null){
+            $this->view->editar = $this->editar;
+            $this->view->crear = $this->crear;
+            $this->view->borrar = $this->borrar;
+            if (!isset($_SESSION)){
+                session_start();
+            }
+            $partidos = $this->model->ordenar($param);
+            $this->view->datos = $partidos;
+            
+            $this->view->render('partido/index');
+        }
+
+        public function buscar($param = null){
+            $this->view->editar = $this->editar;
+            $this->view->crear = $this->crear;
+            $this->view->borrar = $this->borrar;
+            if (!isset($_SESSION)){
+                session_start();
+            }
+            $param = $_GET['expresion'];
+            $partidos = $this->model->buscar($param);
+            $this->view->datos = $partidos;
+            
+            $this->view->render('partido/index');
+        }
+        
         public function imprimir_pdf(){
             $pdf = new mi_pdf();
             $pdf->Addpage();

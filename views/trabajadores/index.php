@@ -38,9 +38,6 @@
                                     <?php foreach ($cabecera as $key => $valor): ?>
                                     <th><?=$valor?></th>
                                     <?php endforeach;?>
-                                    <th>
-                                        Acciones
-                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,16 +49,8 @@
                                     <td><?=$value->email?></td>
                                     <td><?=$value->telefono?></td>
                                     <td><?=$value->direccion?></td>
-                                    <!-- <td><?=$value->poblacion?></td> -->
-                                    <!-- <td><?=$value->provincia?></td> -->
-                                    <!-- <td><?=$value->nacionalidad?></td> -->
                                     <td><?=$value->dni?></td>
                                     <td><?=$value->fechaNac?></td>
-                                    <td>
-                                        <a href="#" title="Visualizar"><i class="material-icons">visibility</i></a>
-                                        <a href="#" title="Editar"><i class="material-icons">edit</i></a>
-                                        <a href="#" title="Eliminar"><i class="material-icons">clear</i></a>
-                                    </td>
                                 </tr>
                                 <?php endforeach;?>
                             </tbody>
