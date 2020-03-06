@@ -12,7 +12,6 @@
             $this->view->render('user/login/index');
         }
 
-
         function register() {
             $this->view->render('user/register/index');
         }
@@ -234,5 +233,11 @@
                     $this->view->render('user/editaruser/index');
                 }
             }
+        }
+
+        function deleteperfil() {
+            session_start();
+            $this->model->deleteUser($_SESSION['id']);
+            $this->logout();
         }
     }

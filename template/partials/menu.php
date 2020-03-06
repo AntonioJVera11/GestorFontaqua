@@ -53,8 +53,9 @@
             <?= $_SESSION['name'] ?>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="<?= URL ?>user/editaruser">Editar Perfil</a>
-            <a class="dropdown-item" href="<?= URL ?>user/changepass">Cambiar Contraseña</a>
+            <a class="dropdown-item" href="<?= URL ?>user/editaruser">Editar perfil</a>
+            <a class="dropdown-item" href="<?= URL ?>user/changepass">Cambiar contraseña</a>
+            <a class="dropdown-item" href="<?= URL ?>user/deleteperfil">Eliminar perfil</a>
             <a class="dropdown-item" href="<?= URL ?>user/logout">Logout</a>
             <div class="dropdown-divider"></div>
             <a disabled class="dropdown-item"><?= $_SESSION['rol_name'] ?></a>

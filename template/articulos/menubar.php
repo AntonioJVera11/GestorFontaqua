@@ -11,10 +11,12 @@
       </li>
       
       <!-- Capa Gestión perfiles -->
-      <?php if (!empty($_SESSION['id'])): ?>
+      <?php if (isset($_SESSION['id'])): ?>
+        <?php if ($_SESSION['rol_name'] != "Registrado"): ?>
         <li class="nav-item">
           <a class="nav-link" href="<?= URL ?>articulos/create">Crear</a>
         </li>
+        <?php endif ?>
       <?php endif ?>
       
      
@@ -25,9 +27,9 @@
           Ordenar
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="#">Nombre</a>
-          <a class="dropdown-item" href="#">Precio</a>
-          <a class="dropdown-item" href="#">Fecha de Modificación</a>
+        <a class="dropdown-item" href="<?= URL ?>articulos/ordenar/nombre">Nombre</a>
+          <a class="dropdown-item" href="<?= URL ?>articulos/ordenar/precio">Precio</a>
+          <a class="dropdown-item" href="<?= URL ?>articulos/ordenar/modificado">Fecha de Modificación</a>
         </div>
       </li>
     </ul>
@@ -36,7 +38,7 @@
     &nbsp;
     <form class="form-inline my-2 my-lg-0">
       <input name="expresion" class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
-      <button class="btn btn-light my-2 my-sm-0" formaction="buscar.php" type="submit">Buscar</button>
+      <button class="btn btn-light my-2 my-sm-0" formaction="<?= URL ?>articulos/buscar" type="submit">Buscar</button>
     </form>
   </div>
 </nav>

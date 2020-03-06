@@ -116,9 +116,7 @@ class UserModel extends Model{
 
     function updateUser($id, $name, $email){
         try{
-            $updateSQL = "
-                UPDATE users SET name = :name, email = :email WHERE id = :id
-            ";
+            $updateSQL = "UPDATE users SET name = :name, email = :email WHERE id = :id";
             $pdo = $this->db->connect();
             $pdoStmt = $pdo->prepare($updateSQL);
             $pdoStmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -130,7 +128,19 @@ class UserModel extends Model{
             $error = 'Error al actualizar contraseña: ' . $e->getMessage() . " en la línea: " . $e->getLine();
             return [$error, 'danger'];
         }
+    }
 
+    function deleteUser($id) {
+        try{
+            $deleteSQL = "DELETE FROM users WHERE id = $id";
+            $pdo = $this->db->connect();
+            $pdoStmt = $pdo->prepare($deleteSQL);
+            $pdoStmt->execute();
+            return ["Usuario eliminado", "success"];
+        } catch (PDOException $e) {
+            $error = 'Error al eliminar usuario: ' . $e->getMessage() . " en la línea: " . $e->getLine();
+            return [$error, 'danger'];
+        }
     }
 }
 

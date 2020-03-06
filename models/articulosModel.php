@@ -21,8 +21,6 @@
     
                 $articulos = $stmt->fetchAll();
                 
-                // var_dump($articulos);
-                // exit(0);
                 return $articulos;
                 
             } catch(PDOException $e) {
@@ -124,9 +122,6 @@
         }
 
         public function update($articulo) {
-            // $id = $articulo["id"];
-            // var_dump($articulo);
-            // exit(0);
             try {
                 $updateSQL ="UPDATE articulos SET
                 nombre = :nombre,
@@ -155,8 +150,47 @@
             }
         }
 
-        public function ordenar($param) {
-            $articulo = $param[0];
+        public function ordenar($param){
+            $campo = $param[0];
+            try {
+                $consultaSQL = "SELECT * FROM articulos ORDER BY $campo ASC";
+                
+                $pdo = $this->db->connect();
+                $pdoStmt = $pdo->prepare($consultaSQL);
+                
+                $pdoStmt->setFetchMode(PDO::FETCH_OBJ);
+                
+                $pdoStmt->execute();
+                
+                $articulos = $pdoStmt->fetchAll();
+                
+                return $articulos;
+            } catch (PDOException $e) {
+                $error = "Error al leer registros: " . $e->getMessage() .  " en la línea " . $e->getLine();
+            }
+        }
+
+        public function buscar($param){
+            $campo = $param;
+            try {
+                $consultaSQL = "SELECT * FROM articulos
+                WHERE nombre LIKE '%$campo%' OR
+                precio LIKE '%$campo%' OR
+                modificado LIKE '%$campo%'";
+    
+                $pdo = $this->db->connect();
+                $pdoStmt = $pdo->prepare($consultaSQL);
+    
+                $pdoStmt->setFetchMode(PDO::FETCH_OBJ);
+    
+                $pdoStmt->execute();
+    
+                $articulos = $pdoStmt->fetchAll();
+    
+                return $articulos;
+            } catch (PDOException $e) {
+                $error = "Error al leer registros: " . $e->getMessage() .  " en la línea " . $e->getLine();
+            }
         }
         
         public function cabeceraTabla() {

@@ -48,7 +48,7 @@
                                             <?php if (empty($_SESSION['id'])): ?>
                                             <td style="display: block; white-space: nowrap; width: 28%; overflow: hidden"><?=$value->modificado?></td>
                                             <?php endif ?>
-                                            <td><img src="imagenes/<?=$value->imagen?>" width="40px" height="40px"></td>
+                                            <td><img src="<?= URL ?>imagenes/<?=$value->imagen?>" width="40px" height="40px"></td>
                                             <?php if (isset($_SESSION['id'])): ?>
                                                 <?php if ($_SESSION['rol_name'] == "Administrador"): ?>
                                                 <td>

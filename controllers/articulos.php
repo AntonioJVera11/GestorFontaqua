@@ -336,30 +336,28 @@
         }
 
         public function ordenar($param = null){
-            $this->view->editar = $this->editar;
-            $this->view->crear = $this->crear;
-            $this->view->borrar = $this->borrar;
             if (!isset($_SESSION)){
                 session_start();
             }
-            $partidos = $this->model->ordenar($param);
-            $this->view->datos = $partidos;
+            $articulos = $this->model->ordenar($param);
+            // var_dump($articulos);
+            // exit(0);
+            $this->view->cabecera = $this->model->cabeceraTabla();
+            $this->view->articulos = $articulos;
             
-            $this->view->render('partido/index');
+            $this->view->render('articulos/index');
         }
 
         public function buscar($param = null){
-            $this->view->editar = $this->editar;
-            $this->view->crear = $this->crear;
-            $this->view->borrar = $this->borrar;
             if (!isset($_SESSION)){
                 session_start();
             }
             $param = $_GET['expresion'];
-            $partidos = $this->model->buscar($param);
-            $this->view->datos = $partidos;
+            $articulos = $this->model->buscar($param);
+            $this->view->cabecera = $this->model->cabeceraTabla();
+            $this->view->articulos = $articulos;
             
-            $this->view->render('partido/index');
+            $this->view->render('articulos/index');
         }
         
         public function imprimir_pdf(){
@@ -377,9 +375,9 @@
                 $altura = $altura + 8.5;
                 $pdf->Cell(10,8,utf8_decode($archivo->id),0,0);
     
-                $pdf->Cell(60,8,utf8_decode($archivo->nombre),0,0);
+                $pdf->Cell(50,8,utf8_decode($archivo->nombre),0,0);
     
-                $pdf->Cell(20,8,utf8_decode($archivo->precio.' eur'),0,0);
+                $pdf->Cell(30,8,utf8_decode($archivo->precio.' euros'),0,0);
 
                 $pdf->Cell(50,8,utf8_decode($archivo->modificado),0,0);
 

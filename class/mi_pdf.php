@@ -20,9 +20,9 @@
 
             $this->Cell(10,8,utf8_decode('#'), 'B', 0);
             #Tipo de archivo
-            $this->Cell(60,8,utf8_decode('Nombre'), 'B', 0);
+            $this->Cell(50,8,utf8_decode('Nombre'), 'B', 0);
             #Nombre de archivo
-            $this->Cell(20,8,utf8_decode('Precio'), 'B', 0);
+            $this->Cell(30,8,utf8_decode('Precio'), 'B', 0);
             #Tamaño de archivo
             $this->Cell(50,8,utf8_decode('Última Modificación'), 'B', 0);
 
