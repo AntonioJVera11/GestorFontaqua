@@ -106,7 +106,7 @@
 
                 $mensaje=$this->model->insert($user);
                 $user = $this->model->getUsuarioEmail($email);
-                $this->model->insertRol($user['id'], 2);
+                $this->model->insertRol($user['id'], 1);
                 $rol = $this->model->getRol($user['id']);
 
                 $email = new registro_email($_POST['nombre'], $_POST['email'], $_POST['password'], $rol['name']);
@@ -177,8 +177,12 @@
     
                 } else {
     
+                    // var_dump($_SESSION['name']);
+                    // exit(0);
                     $mensaje = $this->model->updatePass($_SESSION['id'], $pass1);
-                    $this->view->mensaje = "Se ha cambiado la contraseña con éxito";
+                    $email = new pass_email($_SESSION['name'], $_SESSION['email'], $_POST['password']);
+                    $email->enviar_email();
+                    $this->view->mensaje = "Se ha cambiado la contraseña con éxito. Has recibido un e-mail de confirmación.";
     
                     $this->view->render('user/changepass/index');
                     
