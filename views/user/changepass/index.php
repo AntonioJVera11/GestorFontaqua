@@ -19,9 +19,6 @@
 			<div class="card-header">
 				Fontaqua Instalaciones y Adecuaciones S.L.
 			</div>
-			<div class="card-header">
-			
-			</div>
 			<div class="card-body">
     
             <?php require_once("template/user/form_changepass.php") ?>

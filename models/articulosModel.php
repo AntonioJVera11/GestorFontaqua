@@ -56,25 +56,6 @@
 
         }
 
-        public function getCategorias() {
-            try {
-                $consultaSQL = "SELECT * FROM categorias ORDER BY id";
-    
-                $pdo = $this->db->connect();
-                $stmt = $pdo->prepare($consultaSQL);
-                $stmt->setFetchMode(PDO::FETCH_OBJ);
-    
-                $stmt->execute();
-    
-                return $stmt;
-                
-            } catch(PDOException $e) {
-    
-                $error = 'Error al leer registros '.$e->getMessage().' en la línea '.$e->getLine();
-    
-            }
-        }
-
         public function insert($articulo) {
             try {
             

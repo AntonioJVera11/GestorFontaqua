@@ -1,5 +1,6 @@
 <?php
     require_once("class/registro_email.php");
+    // require_once("class/modificacion_email.php");
     class User Extends Controller {
 
         function __construct() {
@@ -105,9 +106,10 @@
 
                 $mensaje=$this->model->insert($user);
                 $user = $this->model->getUsuarioEmail($email);
-                $this->model->insertRol($user['id'], 3);
+                $this->model->insertRol($user['id'], 2);
+                $rol = $this->model->getRol($user['id']);
 
-                $email = new registro_email($_POST['nombre'], $_POST['email'], $_POST['password']);
+                $email = new registro_email($_POST['nombre'], $_POST['email'], $_POST['password'], $rol['name']);
 		        $email->enviar_email();
                 
                 $this->view->mensaje = $mensaje;
@@ -230,6 +232,8 @@
                     $_SESSION['email'] = $email;
                     $this->view->name = $name;
                     $this->view->email = $email;
+                    $email = new modificacion_email($_POST['name'], $_POST['email']);
+                    $email->enviar_email();
                     $this->view->render('user/editaruser/index');
                 }
             }
