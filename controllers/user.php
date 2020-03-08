@@ -227,7 +227,7 @@
                     
                 } else {
                     $mensaje = $this->model->updateUser($_SESSION['id'], $name, $email);
-                    $this->view->mensaje = "El usuario ha sido actualizado con éxito";
+                    $this->view->mensaje = "El usuario ha sido actualizado con éxito. Has recibido un e-mail con tus nuevos datos.";
                     $_SESSION['name'] = $name;
                     $_SESSION['email'] = $email;
                     $this->view->name = $name;
